@@ -1,13 +1,22 @@
+#include "main.h"
+
+/**
+ * _atoi - Converts a string to an integer.
+ * @s: The string to be converted.
+ *
+ * Return: The integer converted from the string.
+ */
 int _atoi(char *s)
 {
-	int i = 0;
-	int d = 0;  /* Tracks the number of '-' signs */
-	int n = 0;  /* The integer result */
-	int len = 0; /* Length of the string */
-	int f = 0; /* Flag to indicate if a valid integer is found */
-	int digit = 0; /* Temporary variable to hold the current digit */
+	int i, d, n, len, f, digit;
 
-	/* Calculate the length of the string */
+	i = 0;
+	d = 0;
+	n = 0;
+	len = 0;
+	f = 0;
+	digit = 0;
+
 	while (s[len] != '\0')
 		len++;
 
