@@ -1,64 +1,99 @@
-#include "main.h"
 #include <stdlib.h>
-
-void util(char **, char *);
-void create_word(char **, char *, int, int, int);
+#include "main.h"
 
 /**
- * strtow - Splits a string into words.
- * @str: The string
+ * count_word - Helper function to count the number of words in a string.
+ * @s: String to evaluate.
  *
- * Return: Returns a pointer to an array of strings (words).
+ * Return: Number of words.
  */
-char **strtow(char *str)
+int count_word(char *s)
 {
-	char **words;
-	int i, flag, len;
+	int flag, c, w;
 
-	if (str == NULL || str[0] == '\0' || (str[0] == ' ' && str[1] == '\0'))
-		return (NULL);
+	flag = 0;
+	w = 0;
 
-	i = flag = len = 0;
-	while (str[i])
+	for (c = 0; s[c] != '\0'; c++)
 	{
-		if (flag == 0 && str[i] != ' ')
-			flag = 1;
-		if (i > 0 && str[i] == ' ' && str[i - 1] != ' ')
-		{
+		if (s[c] == ' ')
 			flag = 0;
-			len++;
+		else if (flag == 0)
+		{
+			flag = 1;
+			w++;
 		}
-		i++;
 	}
 
-	len += flag == 1 ? 1 : 0;
-	if (len == 0)
-		return (NULL);
-
-	words = (char **)malloc(sizeof(char *) * (len + 1));
-	if (words == NULL)
-		return (NULL);
-
-	util(words, str);
-	words[len] = NULL;
-	return (words);
+	return (w);
 }
 
 /**
- * util - A utility function for fetching words into an array.
- * @words: The strings array
- * @str: The string
+ * split_word - Splits a string into a word.
+ * @str: The input string.
+ * @start: The start index of the word.
+ * @end: The end index of the word.
+ *
+ * Return: The split word as a newly allocated string.
  */
-void util(char **words, char *str)
+char *split_word(char *str, int start, int end)
 {
-	int i, j, start, flag;
+	int i;
+	char *word = (char *)malloc(sizeof(char) * (end - start + 1));
 
-	i = j = flag = 0;
-	while (str[i])
+	if (word == NULL)
+		return (NULL);
+
+	for (i = 0; start < end; i++, start++)
+		word[i] = str[start];
+
+	word[i] = '\0';
+
+	return (word);
+}
+
+/**
+ * strtow - Splits a string into words.
+ * @str: String to split.
+ *
+ * Return: Pointer to an array of strings (Success) or NULL (Error).
+ */
+char **strtow(char *str)
+{
+	char **matrix;
+	int i, k = 0, len = 0, words, c = 0, start, end;
+
+	while (str[len])
+		len++;
+
+	words = count_word(str);
+
+	if (words == 0)
+		return (NULL);
+
+	matrix = (char **)malloc(sizeof(char *) * (words + 1));
+
+	if (matrix == NULL)
+		return (NULL);
+
+	for (i = 0; i <= len; i++)
 	{
-		if (flag == 0 && str[i] != ' ')
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			start = i;
-			flag = 1;
+			if (c)
+			{
+				end = i;
+				matrix[k] = split_word(str, start, end);
+				k++;
+				c = 0;
+			}
 		}
+		else if (c++ == 0)
+			start = i;
+	}
+
+	matrix[k] = NULL;
+
+	return (matrix);
+}
 
