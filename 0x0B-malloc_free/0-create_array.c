@@ -3,8 +3,8 @@
 
 /**
  * create_array - creates an array of size 'size' and assigns 'c' to each element
- * @size: the size of the array
- * @c: the character to assign to each element
+ * @size: size of the array
+ * @c: character to assign
  *
  * Description: This function creates an array of 'size' elements and assigns the
  * character 'c' to each element.
@@ -13,17 +13,17 @@
  */
 char *create_array(unsigned int size, char c)
 {
-    char *str;
-    unsigned int i;
+	char *str;
+	unsigned int i;
 
-    str = malloc(sizeof(char) * size);
+	str = malloc(sizeof(char) * size);
 
-    if (size == 0 || str == NULL)
-        return (NULL);
+	if (size == 0 || str == NULL)
+		return (NULL);
 
-    for (i = 0; i < size; i++)
-        str[i] = c;
+	for (i = 0; i < size; i++)
+		str[i] = c;
 
-    return (str);
+	return (str);
 }
 
