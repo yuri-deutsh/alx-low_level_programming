@@ -10,11 +10,11 @@
  */
 void init_dog(struct dog *d, char *name, float age, char *owner)
 {
-    if (d == NULL)
-        return; // Return early if d is NULL
+	if (d == NULL)
+		return; /* Return early if d is NULL */
 
-    d->name = name;
-    d->age = age;
-    d->owner = owner;
+	d->name = name;
+	d->age = age;
+	d->owner = owner;
 }
 
