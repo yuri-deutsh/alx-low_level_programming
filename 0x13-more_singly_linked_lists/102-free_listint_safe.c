@@ -1,6 +1,6 @@
 /*
  * File: 102-free_listint_safe.c
- * Auth: MKADMI NB
+ * Auth: MKADMI N
  */
 
 #include "lists.h"
