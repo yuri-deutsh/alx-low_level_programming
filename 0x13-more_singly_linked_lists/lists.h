@@ -1,9 +1,14 @@
 #ifndef LISTS_H
 #define LISTS_H
 
-#include <stdio.h>
+/*
+ * File: lists.h
+ * Auth: Mk
+ * Desc: Header file containing prototypes and definitions for all functions
+ *       and types written in the 0x12-more_singly_linked_lists directory.
+ */
+
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * struct listint_s - singly linked list
@@ -30,7 +35,9 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index);
 int sum_listint(listint_t *head);
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n);
 int delete_nodeint_at_index(listint_t **head, unsigned int index);
-size_t print_listint_safe(const listint_t *head);
 listint_t *reverse_listint(listint_t **head);
+size_t print_listint_safe(const listint_t *head);
+size_t free_listint_safe(listint_t **h);
+listint_t *find_listint_loop(listint_t *head);
 
-#endif /*LISTS_H*/
+#endif /* LISTS_H */
